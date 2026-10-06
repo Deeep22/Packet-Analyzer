@@ -3,6 +3,16 @@
 
 This document explains **everything** about this project - from basic networking concepts to the complete code architecture. After reading this, you should understand exactly how packets flow through the system.
 
+The problem: Network operators need to know which apps use their network. Most traffic is now encrypted, so they can't read the content. Port numbers don't help either, because almost everything uses port 443. So operators can't tell video streaming from work tools, and they can't apply rules to either.
+
+The insight: Encrypted traffic still reveals the destination domain at the start of a connection (the TLS handshake). This engine reads that domain, without decrypting anything, and matches it to an app.
+
+What it does: Reads a packet capture. Groups packets into connections. Identifies the app for each. Applies blocking rules. Writes a filtered capture.
+
+Who it's for: Network admins who want visibility and control. Also anyone learning how packet inspection works.
+
+Trade-off to know: This kind of inspection is powerful. It also raises privacy questions. It's built for networks you own or administer.
+
 ---
 
 ## Table of Contents
